@@ -11,7 +11,7 @@ import SwiftyJSON
 
 struct Color: RouterObject {
     
-    private let rootPath = "/colors"
+    fileprivate let rootPath = "/colors"
     
     var name: String?
     var hex: String?
@@ -26,8 +26,8 @@ struct Color: RouterObject {
     }
     
     func getRandomColor() -> Color? {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        if let colors = defaults.arrayForKey("appColors"){
+        let defaults = UserDefaults.standard
+        if let colors = defaults.array(forKey: "appColors"){
             let jsonColors = JSON(colors)
             let randomNumber = Int(arc4random_uniform(UInt32(jsonColors.arrayValue.count)))
             return(Color(json: jsonColors.arrayValue[randomNumber]))
@@ -43,7 +43,7 @@ struct Color: RouterObject {
 extension Color {
     func getHexCode() -> Int? {
         if let code = self.hex {
-            return Int(strtoul(code.stringByReplacingOccurrencesOfString("#", withString: ""), nil, 16))
+            return Int(strtoul(code.replacingOccurrences(of: "#", with: ""), nil, 16))
         }
         return nil
     }

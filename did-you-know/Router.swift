@@ -11,12 +11,13 @@ import Alamofire
 
 let baseUrl = "http://did-you-know.herokuapp.com/api"
 
-enum Router<T where T : RouterObject>: URLRequestConvertible {
+enum Router<T>: URLRequestConvertible where T : RouterObject {
+
     case findAll(T)
     
-    var method: Alamofire.Method {
+    var method: Alamofire.HTTPMethod {
         switch self {
-        case .findAll:return .GET
+        case .findAll:return .get
         }
     }
     
@@ -26,9 +27,11 @@ enum Router<T where T : RouterObject>: URLRequestConvertible {
         }
     }
     
-    var URLRequest: NSMutableURLRequest {
-        let url = NSURL(string: baseUrl)
-        return NSMutableURLRequest(URL: (url?.URLByAppendingPathComponent(path))!)
+    func asURLRequest() throws -> URLRequest {
+        let url = URL(string: baseUrl)
+        return URLRequest(url: (url?.appendingPathComponent(path))!)
     }
+    
+    
     
 }

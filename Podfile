@@ -6,7 +6,7 @@ target 'did-you-know' do
   use_frameworks!
 
   # Pods for did-you-know
-  pod 'Alamofire’, ‘~> 3.1.2’
-  pod 'SwiftyJSON', '2.4.0'
+  pod 'Alamofire’
+  pod 'SwiftyJSON'
 
 end

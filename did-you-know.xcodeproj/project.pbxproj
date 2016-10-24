@@ -183,6 +183,8 @@
 				TargetAttributes = {
 					20B753151DBE2FB600EAF8B2 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 9HC7R98EPH;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -391,11 +393,13 @@
 			baseConfigurationReference = B57C25000D7571FDE304B832 /* Pods-did-you-know.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 9HC7R98EPH;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "did-you-know/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.el12ncom.el12n.did-you-know";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -404,11 +408,13 @@
 			baseConfigurationReference = 1C832717B6A973B91B52BF2D /* Pods-did-you-know.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 9HC7R98EPH;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "did-you-know/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.el12ncom.el12n.did-you-know";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

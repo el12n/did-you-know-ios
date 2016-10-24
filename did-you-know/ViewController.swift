@@ -37,11 +37,15 @@ class ViewController: UIViewController {
         requestFact()
     }
     
-    private func requestFact(){
+    fileprivate func requestFact(){
         setFactLoading(true)
         
-        let urlRequest = Router.findAll(Fact()).URLRequest
-        Alamofire.request(urlRequest)
+        guard let urlRequest = try? Router.findAll(Fact()).asURLRequest() else {
+            print("Couldn't make the url request ma' nigga")
+            return
+        }
+        
+        Alamofire.request(urlRequest as URLRequestConvertible)
             .responseJSON{ response in
                 self.setFactLoading(false)
                 
@@ -53,15 +57,15 @@ class ViewController: UIViewController {
         }
     }
     
-    private func setFact(fact: Fact){
+    fileprivate func setFact(_ fact: Fact){
         factLabel.text = fact.value
-        languageButton.setTitle("Facts in \(fact.getLanguage())", forState: .Normal)
-        languageContainerView.hidden = false
+        languageButton.setTitle("Facts in \(fact.getLanguage())", for: UIControlState())
+        languageContainerView.isHidden = false
     }
     
-    private func setFactLoading(isLoading: Bool){
-        activityIndicator.hidden = !isLoading
-        factLabel.hidden = isLoading
+    fileprivate func setFactLoading(_ isLoading: Bool){
+        activityIndicator.isHidden = !isLoading
+        factLabel.isHidden = isLoading
         if isLoading {
             activityIndicator.startAnimating()
         }else{
@@ -69,11 +73,11 @@ class ViewController: UIViewController {
         }
     }
     
-    private func changeThemeColor(){
+    fileprivate func changeThemeColor(){
         if let color = Color().getRandomColor() {
-            UIView.animateWithDuration(0.180, delay: 0.0, options: [], animations: {
+            UIView.animate(withDuration: 0.180, delay: 0.0, options: [], animations: {
                 self.view.backgroundColor = UIColor(netHex: color.getHexCode()!)
-                self.anotherFactButton.setTitleColor(UIColor(netHex:color.getHexCode()!), forState: .Normal)
+                self.anotherFactButton.setTitleColor(UIColor(netHex:color.getHexCode()!), for: UIControlState())
                 }, completion: nil)
         }
     }

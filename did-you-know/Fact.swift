@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 
 struct Fact: RouterObject{
-    private let rootPath = "/fact"
+    fileprivate let rootPath = "/fact"
     
     var value: String?
     var lang: String?
