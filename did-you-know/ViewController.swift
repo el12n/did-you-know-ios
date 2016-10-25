@@ -56,7 +56,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if let language = selectedLanguage {
             parameters = ["lang": Fact().getLanguageCode(lang: language)]
         }
-    
+        
         guard let urlRequest = try? Router.findAll(FactService(), parameters).asURLRequest() else {
             print("Error making the url")
             return
@@ -64,13 +64,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         Alamofire.request(urlRequest as URLRequestConvertible)
             .responseJSON{ response in
-                self.setFactLoading(false)
-                
                 let json = JSON(response.result.value ?? [])
                 let fact = Fact(json: json)
                 
                 self.setFact(fact)
+                
                 self.changeThemeColor()
+                self.setFactLoading(false)
         }
     }
     
@@ -81,12 +81,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     fileprivate func setFactLoading(_ isLoading: Bool){
-        activityIndicator.isHidden = !isLoading
-        factLabel.isHidden = isLoading
+        self.activityIndicator.isHidden = !isLoading
+        self.factLabel.isHidden = isLoading
         if isLoading {
-            activityIndicator.startAnimating()
+            self.activityIndicator.startAnimating()
         }else{
-            activityIndicator.stopAnimating()
+            self.activityIndicator.stopAnimating()
         }
     }
     
@@ -95,7 +95,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             UIView.animate(withDuration: 0.180, delay: 0.0, options: [], animations: {
                 self.view.backgroundColor = UIColor(netHex: color.getHexCode()!)
                 self.anotherFactButton.setTitleColor(UIColor(netHex:color.getHexCode()!), for: UIControlState())
-                }, completion: nil)
+            })
         }
     }
     
