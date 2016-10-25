@@ -52,11 +52,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     fileprivate func requestFact(){
         setFactLoading(true)
         
-        guard let urlRequest = try? Router.findAll(selectedLanguage != nil ? Fact().getLanguageCode(lang: selectedLanguage!) : nil, FactService()).asURLRequest() else {
+        var parameters = Parameters()
+        if let language = selectedLanguage {
+            parameters = ["lang": Fact().getLanguageCode(lang: language)]
+        }
+    
+        guard let urlRequest = try? Router.findAll(FactService(), parameters).asURLRequest() else {
             print("Error making the url")
             return
         }
-        print(urlRequest.url?.absoluteString)
+        
         Alamofire.request(urlRequest as URLRequestConvertible)
             .responseJSON{ response in
                 self.setFactLoading(false)
