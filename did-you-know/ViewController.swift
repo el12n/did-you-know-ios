@@ -24,7 +24,7 @@ extension UIColor {
     }
 }
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var factLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -32,19 +32,31 @@ class ViewController: UIViewController {
     @IBOutlet weak var languageButton: UIButton!
     @IBOutlet weak var languageContainerView: UIView!
     
+    @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var visualEffectView: UIVisualEffectView!
+    
+    let languages = Fact().getLanguagesList()
+    
+    var selectedLanguage: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        
         requestFact()
     }
     
     fileprivate func requestFact(){
         setFactLoading(true)
         
-        guard let urlRequest = try? Router.findAll(Fact()).asURLRequest() else {
-            print("Couldn't make the url request ma' nigga")
+        guard let urlRequest = try? Router.findAll(selectedLanguage != nil ? Fact().getLanguageCode(lang: selectedLanguage!) : nil, FactService()).asURLRequest() else {
+            print("Error making the url")
             return
         }
-        
+        print(urlRequest.url?.absoluteString)
         Alamofire.request(urlRequest as URLRequestConvertible)
             .responseJSON{ response in
                 self.setFactLoading(false)
@@ -59,7 +71,7 @@ class ViewController: UIViewController {
     
     fileprivate func setFact(_ fact: Fact){
         factLabel.text = fact.value
-        languageButton.setTitle("Facts in \(fact.getLanguage())", for: UIControlState())
+        languageButton.setTitle("Facts in \(fact.getLanguage())", for: .normal)
         languageContainerView.isHidden = false
     }
     
@@ -82,8 +94,55 @@ class ViewController: UIViewController {
         }
     }
     
+    fileprivate func animateIn(){
+        self.view.addSubview(tableView)
+        tableView.center = self.view.center
+        
+        tableView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+        tableView.alpha = 0
+        
+        UIView.animate(withDuration: 0.4){
+            self.visualEffectView.isHidden = false
+            self.tableView.alpha = 1
+            self.tableView.transform = CGAffineTransform.identity
+        }
+    }
+    
+    fileprivate func animateOut(){
+        UIView.animate(withDuration: 0.3, animations: {
+            self.tableView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+            self.tableView.alpha = 0
+            
+            self.visualEffectView.isHidden = true
+        }) { (success: Bool) in
+            self.tableView.removeFromSuperview()
+        }
+    }
+    
+    
+    // MARK: - Actions
     @IBAction func requestFactAPI() {
         requestFact()
+    }
+    
+    @IBAction func changeLanguage() {
+        animateIn()
+    }
+    
+    // MARK: - Table view data source
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return languages.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "languageCell", for: indexPath)
+        cell.textLabel?.text = languages[indexPath.row]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedLanguage = languages[indexPath.row]
+        animateOut()
     }
     
 }

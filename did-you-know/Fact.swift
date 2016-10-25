@@ -9,7 +9,22 @@
 import Foundation
 import SwiftyJSON
 
-struct Fact: RouterObject{
+extension Dictionary where Value: Equatable{
+    func keysForValue(value: Value) -> [Key] {
+        return flatMap { (key: Key, val: Value) -> Key? in
+            value == val ? key : nil
+        }
+    }
+}
+
+struct Fact{
+    
+    let languagesDef = [
+        "en": "English",
+        "es": "Spanish",
+        "fr": "French"
+    ]
+    
     fileprivate let rootPath = "/fact"
     
     var value: String?
@@ -23,19 +38,16 @@ struct Fact: RouterObject{
         self.value = json["value"].stringValue
         self.lang = json["lang"].stringValue
     }
-    
-    func findAll() -> String {
-        return rootPath
-    }
 }
 
 extension Fact {
     func getLanguage() -> String{
-        switch self.lang! {
-        case "en": return "English"
-        case "es": return "Spanish"
-        case "fr": return "French"
-        default: return ""
-        }
+        return self.languagesDef[self.lang!]!
+    }
+    func getLanguageCode(lang: String) -> String{
+        return self.languagesDef.keysForValue(value: lang)[0]
+    }
+    func getLanguagesList() -> [String]{
+        return self.languagesDef.map{"\($1)"}
     }
 }

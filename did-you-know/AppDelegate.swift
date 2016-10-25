@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     fileprivate func requestColorsIfNeeded(){
         let defaults = UserDefaults.standard
         if defaults.object(forKey: "appColors") == nil {
-            guard let urlRequest = try? Router.findAll(Color()).asURLRequest() else{
+            guard let urlRequest = try? Router.findAll(nil, Color()).asURLRequest() else{
                 print("Couldn't make get the request nigga!")
                 return
             }

@@ -18,6 +18,7 @@
 		20B7531F1DBE2FB600EAF8B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20B7531D1DBE2FB600EAF8B2 /* Main.storyboard */; };
 		20B753211DBE2FB600EAF8B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20B753201DBE2FB600EAF8B2 /* Assets.xcassets */; };
 		20B753241DBE2FB600EAF8B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20B753221DBE2FB600EAF8B2 /* LaunchScreen.storyboard */; };
+		20CF5ABD1DBEDE97008525E4 /* FactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CF5ABC1DBEDE97008525E4 /* FactService.swift */; };
 		3EC53174171C3378B1F66D90 /* Pods_did_you_know.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E983E1B946E6C3B4A828EC26 /* Pods_did_you_know.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,7 @@
 		20B753201DBE2FB600EAF8B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		20B753231DBE2FB600EAF8B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		20B753251DBE2FB600EAF8B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		20CF5ABC1DBEDE97008525E4 /* FactService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FactService.swift; sourceTree = "<group>"; };
 		B57C25000D7571FDE304B832 /* Pods-did-you-know.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-did-you-know.debug.xcconfig"; path = "Pods/Target Support Files/Pods-did-you-know/Pods-did-you-know.debug.xcconfig"; sourceTree = "<group>"; };
 		E983E1B946E6C3B4A828EC26 /* Pods_did_you_know.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_did_you_know.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -123,6 +125,7 @@
 				2035FDF31DBE55C500968EB1 /* Views */,
 				2035FDF41DBE55D300968EB1 /* Controllers */,
 				2035FDEF1DBE51FD00968EB1 /* Helpers */,
+				20CF5ABB1DBEDE7F008525E4 /* Services */,
 				20B7532B1DBE364100EAF8B2 /* Supporting Files */,
 			);
 			path = "did-you-know";
@@ -137,6 +140,14 @@
 				20B753251DBE2FB600EAF8B2 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		20CF5ABB1DBEDE7F008525E4 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				20CF5ABC1DBEDE97008525E4 /* FactService.swift */,
+			);
+			name = Services;
 			sourceTree = "<group>";
 		};
 		4B9EBDBC4C8FF2FE4D92DB8A /* Pods */ = {
@@ -178,7 +189,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Alvaro De La Cruz";
 				TargetAttributes = {
 					20B753151DBE2FB600EAF8B2 = {
@@ -278,6 +289,7 @@
 				2035FDEB1DBE50F500968EB1 /* RouterObject.swift in Sources */,
 				2035FDEE1DBE518500968EB1 /* Fact.swift in Sources */,
 				2035FDF61DBE5FFA00968EB1 /* Color.swift in Sources */,
+				20CF5ABD1DBEDE97008525E4 /* FactService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,8 +329,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -340,7 +354,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -363,8 +377,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -380,9 +396,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -392,6 +409,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B57C25000D7571FDE304B832 /* Pods-did-you-know.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 9HC7R98EPH;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -407,6 +425,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1C832717B6A973B91B52BF2D /* Pods-did-you-know.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 9HC7R98EPH;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";

@@ -13,7 +13,7 @@ let baseUrl = "http://did-you-know.herokuapp.com/api"
 
 enum Router<T>: URLRequestConvertible where T : RouterObject {
 
-    case findAll(T)
+    case findAll(String?, T)
     
     var method: Alamofire.HTTPMethod {
         switch self {
@@ -21,17 +21,17 @@ enum Router<T>: URLRequestConvertible where T : RouterObject {
         }
     }
     
-    var path: String {
+    var result: (path: String, parameters: Parameters) {
         switch self {
-        case .findAll(let object): return object.findAll()
+        case .findAll(let query, let object): return (object.findAll(), query != nil ? ["lang":query!] : Parameters())
         }
     }
     
     func asURLRequest() throws -> URLRequest {
         let url = URL(string: baseUrl)
-        return URLRequest(url: (url?.appendingPathComponent(path))!)
+        let urlRequest = URLRequest(url: (url?.appendingPathComponent(result.path))!)
+        
+        return try URLEncoding.default.encode(urlRequest, with: result.parameters)
     }
-    
-    
     
 }
