@@ -134,6 +134,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         animateIn()
     }
     
+    @IBAction func requestOnSwipe(_ recognizer: UISwipeGestureRecognizer) {
+        switch recognizer.direction{
+        case UISwipeGestureRecognizerDirection.left: requestFact()
+        default: break
+        }
+    }
+    
     // MARK: - Table view data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return languages.count
